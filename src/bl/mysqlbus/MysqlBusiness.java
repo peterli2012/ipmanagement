@@ -33,6 +33,7 @@ public class MysqlBusiness<F, L> implements BusinessInterface, TableBusinessInte
         Transaction tx = session.beginTransaction();
         session.save(genLeafBean);
         tx.commit();
+        MysqlHibernateDao.currentSession().close();
         // TODO deal with return value.
         return null;
     }
@@ -47,6 +48,7 @@ public class MysqlBusiness<F, L> implements BusinessInterface, TableBusinessInte
         BusinessResult br = new BusinessResult();
         br.setResponseData(query.uniqueResult());
         tx.commit();
+        MysqlHibernateDao.currentSession().close();
         return br;
     }
 
@@ -64,6 +66,7 @@ public class MysqlBusiness<F, L> implements BusinessInterface, TableBusinessInte
         query.setLong(0, Long.valueOf(objectId));
         query.executeUpdate();
         tx.commit();
+        MysqlHibernateDao.currentSession().close();
         // TODO deal with return value.
         return null;
     }
@@ -74,6 +77,7 @@ public class MysqlBusiness<F, L> implements BusinessInterface, TableBusinessInte
         Transaction tx = session.beginTransaction();
         session.save(newBean);
         tx.commit();
+        MysqlHibernateDao.currentSession().close();
         // TODO deal with return value.
         return null;
     }
@@ -85,6 +89,7 @@ public class MysqlBusiness<F, L> implements BusinessInterface, TableBusinessInte
         Query query = session.createQuery(hql);
         BusinessResult br = new BusinessResult();
         br.setResponseData(query.list());
+        MysqlHibernateDao.currentSession().close();
         return br;
     }
 
@@ -111,12 +116,15 @@ public class MysqlBusiness<F, L> implements BusinessInterface, TableBusinessInte
         query.setFirstResult(queryParam.getIDisplayStart());
         query.setMaxResults(queryParam.getIDisplayLength());
         dataTable.setAaData(query.list());
+        MysqlHibernateDao.currentSession().close();
         return dataTable;
     }
 
     @Override
     public long getCount(TableQueryVo queryParam) {
         Query query = MysqlHibernateDao.currentSession().createQuery("select count(*) from " + this.cls.getSimpleName());
-        return ((Long) query.uniqueResult()).longValue();
+        long result = ((Long) query.uniqueResult()).longValue();
+        MysqlHibernateDao.currentSession().close();
+        return result;
     }
 }

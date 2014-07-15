@@ -35,7 +35,7 @@ table tbody tr.even.row_selected td {
 				<div class="col-lg-10">
 					<select name="user.ugroup" value="${user.ugroup}">
 					    <s:iterator value="userGroup">
-					       <option value="id">${name}</option>
+					       <option value="${id}">${name}</option>
 					    </s:iterator>
 					</select>
 				</div>

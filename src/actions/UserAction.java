@@ -68,6 +68,7 @@ public class UserAction extends BaseTableAction<UserBusiness> {
         TableInitVo init = new TableInitVo();
         init.getAoColumns().add(new TableHeaderVo("name", "Owner").enableSearch());
         List<UserGroupBean> userGroupList = (List<UserGroupBean>) this.getBusiness().getUserGroupBeans();
+        this.setUserGroup(userGroupList);
         String[][] userGroup = new String[2][userGroupList.size()];
         if (userGroupList.size() > 0) {
             for (int i = 0; i < userGroupList.size(); i++) {
@@ -99,6 +100,8 @@ public class UserAction extends BaseTableAction<UserBusiness> {
 
     @Override
     public String edit() throws Exception {
+        List<UserGroupBean> userGroupList = (List<UserGroupBean>) this.getBusiness().getUserGroupBeans();
+        this.setUserGroup(userGroupList);
         user = (UserBean) getBusiness().getLeaf(getId()).getResponseData();
         return SUCCESS;
     }

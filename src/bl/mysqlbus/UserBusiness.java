@@ -27,6 +27,8 @@ public class UserBusiness extends MysqlBusiness<BeanContext, UserBean> {
 
     public List<UserGroupBean> getUserGroupBeans() {
         Query query = MysqlHibernateDao.currentSession().createQuery("from " + UserGroupBean.class.getSimpleName());
-        return query.list();
+        List<UserGroupBean> list = query.list();
+        MysqlHibernateDao.currentSession().close();
+        return list;
     }
 }
