@@ -6,7 +6,13 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
-              
+                  <li>
+                      <a  href="${rootPath}/usergroup/usergroup.action">
+                          <i class="fa fa-tasks"></i>
+                          <span>用户组管理</span>
+                          <span class="label label-danger pull-right mail-info"></span>
+                      </a>
+                  </li>
                   <li>
                       <a  href="${rootPath}/user/user.action">
                           <i class="fa fa-tasks"></i>
@@ -14,6 +20,7 @@
                           <span class="label label-danger pull-right mail-info"></span>
                       </a>
                   </li>
+                  
                   <!--multi level menu end-->
 
               </ul>

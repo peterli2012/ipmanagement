@@ -3,15 +3,16 @@
  */
 package bl.mysqlbus;
 
-import bl.beans.UserBean;
-import bl.common.BeanContext;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vo.table.TableDataVo;
-import vo.table.TableQueryVo;
 
-import java.util.ArrayList;
-import java.util.List;
+import bl.beans.UserBean;
+import bl.beans.UserGroupBean;
+import bl.common.BeanContext;
+import dao.MysqlHibernateDao;
 
 /**
  * @author pli
@@ -21,25 +22,11 @@ public class UserBusiness extends MysqlBusiness<BeanContext, UserBean> {
     private static Logger log = LoggerFactory.getLogger(UserBusiness.class);
 
     public UserBusiness() {
+        this.cls = UserBean.class;
     }
 
-    @Override
-    public TableDataVo query(TableQueryVo queryParam) {
-        List<UserBean> list = new ArrayList<UserBean>();
-        UserBean ub1 = new UserBean();
-        ub1.setName("peterli");
-        UserBean ub2 = new UserBean();
-        ub2.setName("china");
-        list.add(ub1);
-        list.add(ub2);
-        TableDataVo dataTable = new TableDataVo();
-        dataTable.setsEcho(queryParam.getSEcho());
-        dataTable.setAaData(list);
-        return dataTable;
-    }
-
-    @Override
-    public long getCount(TableQueryVo queryParam) {
-        return 2;
+    public List<UserGroupBean> getUserGroupBeans() {
+        Query query = MysqlHibernateDao.currentSession().createQuery("from " + UserGroupBean.class.getSimpleName());
+        return query.list();
     }
 }
