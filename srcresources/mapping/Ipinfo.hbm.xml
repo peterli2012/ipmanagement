@@ -17,21 +17,6 @@
 		<property name="Subnet" type="java.lang.Integer">
 			<column name="subnet"/>
 		</property>
-		<property name="Poolid" type="java.lang.Integer">
-			<column name="poolid"/>
-		</property>
-		<property name="Rack" type="java.lang.Integer">
-			<column name="rack"/>
-		</property>
-		<property name="Slot" type="java.lang.Integer">
-			<column name="slot"/>
-		</property>
-		<property name="Userid" type="java.lang.Integer">
-			<column name="userid"/>
-		</property>
-		<property name="Project" type="java.lang.Integer">
-			<column name="project"/>
-		</property>
 		<property name="Comments" type="java.lang.String">
 			<column name="comments"/>
 		</property>
