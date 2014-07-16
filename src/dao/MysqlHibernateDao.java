@@ -9,10 +9,22 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import actions.BaseAction;
 import bl.beans.UserBean;
 
+/**
+ * Simply maintained session life cycle, in the future, you guys implement a
+ * actual generic dao function.
+ * 
+ * @author pli
+ *
+ */
 public class MysqlHibernateDao {
+    private static Logger LOG = LoggerFactory.getLogger(MysqlHibernateDao.class);
+
     public static final SessionFactory sessionFactory;
 
     static {
@@ -25,7 +37,7 @@ public class MysqlHibernateDao {
             // .
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
+            LOG.error("Initial SessionFactory creation failed {}.", ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -54,14 +66,18 @@ public class MysqlHibernateDao {
         UserBean userBean = new UserBean();
         userBean.setName("peterli");
         System.out.println(UserBean.class.getSimpleName());
-        Session session = MysqlHibernateDao.currentSession();
-        Transaction tx = session.beginTransaction();
-        session.save(userBean);
+        Session session1 = MysqlHibernateDao.currentSession();
+        Transaction tx = session1.beginTransaction();
+        session1.save(userBean);
         tx.commit();
-        List<UserBean> userBeans = MysqlHibernateDao.currentSession().createQuery("from UserBean").list();
+        MysqlHibernateDao.closeSession();
+        Session session2 = MysqlHibernateDao.currentSession();
+        System.out.println(session2 == session1);
+        List<UserBean> userBeans = session2.createQuery("from UserBean").list();
         for (UserBean ub : userBeans) {
             System.out.println(ub.getName());
         }
+        MysqlHibernateDao.closeSession();
     }
 
 }

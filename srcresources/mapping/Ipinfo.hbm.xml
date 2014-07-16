@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="bl.beans.DeviceInfoBean" table="device_info">
+		<id name="Id" type="java.lang.Long">
+			<column name="ipid" />
+			<generator class="identity" />
+		</id>
+		<property name="Tag" type="java.lang.Integer">
+			<column name="tag"/>
+		</property>
+		<property name="Ip" type="java.lang.String">
+			<column name="ip" length="40"/>
+		</property>
+		<property name="Subnet" type="java.lang.Integer">
+			<column name="subnet"/>
+		</property>
+		<property name="Poolid" type="java.lang.Integer">
+			<column name="poolid"/>
+		</property>
+		<property name="Rack" type="java.lang.Integer">
+			<column name="rack"/>
+		</property>
+		<property name="Slot" type="java.lang.Integer">
+			<column name="slot"/>
+		</property>
+		<property name="Userid" type="java.lang.Integer">
+			<column name="userid"/>
+		</property>
+		<property name="Project" type="java.lang.Integer">
+			<column name="project"/>
+		</property>
+		<property name="Comments" type="java.lang.String">
+			<column name="comments"/>
+		</property>
+	</class>
+</hibernate-mapping>

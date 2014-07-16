@@ -16,7 +16,7 @@ import dao.MysqlHibernateDao;
 
 /**
  * @author pli
- * @since $Date:2014-02-20$
+ * @since $Date:2014-07-16$
  */
 public class UserBusiness extends MysqlBusiness<BeanContext, UserBean> {
     private static Logger log = LoggerFactory.getLogger(UserBusiness.class);
@@ -28,7 +28,7 @@ public class UserBusiness extends MysqlBusiness<BeanContext, UserBean> {
     public List<UserGroupBean> getUserGroupBeans() {
         Query query = MysqlHibernateDao.currentSession().createQuery("from " + UserGroupBean.class.getSimpleName());
         List<UserGroupBean> list = query.list();
-        MysqlHibernateDao.currentSession().close();
+        MysqlHibernateDao.closeSession();
         return list;
     }
 }

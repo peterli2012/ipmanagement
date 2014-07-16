@@ -16,7 +16,7 @@ import dao.MysqlHibernateDao;
 
 /**
  * @author pli
- * @since $Date:2014-02-20$
+ * @since $Date:2014-07-16$
  */
 public class UserGroupBusiness extends MysqlBusiness<BeanContext, UserGroupBean> {
     private static Logger log = LoggerFactory.getLogger(UserGroupBusiness.class);

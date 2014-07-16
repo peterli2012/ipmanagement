@@ -75,7 +75,7 @@ public class MysqlBusiness<F, L> implements BusinessInterface, TableBusinessInte
     public BusinessResult updateLeaf(BeanContext origBean, BeanContext newBean) {
         Session session = MysqlHibernateDao.currentSession();
         Transaction tx = session.beginTransaction();
-        session.save(newBean);
+        session.saveOrUpdate(newBean);
         tx.commit();
         MysqlHibernateDao.closeSession();
         // TODO deal with return value.

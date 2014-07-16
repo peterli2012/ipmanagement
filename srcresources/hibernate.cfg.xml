@@ -10,7 +10,7 @@
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
 		<!-- JDBC connection pool (use the built-in) -->
-		<property name="connection.pool_size">1</property>
+		<property name="connection.pool_size">20</property>
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
 		<!-- Enable Hibernate's automatic session context management -->
@@ -21,5 +21,10 @@
 		<property name="hbm2ddl.auto">update</property>
 		<mapping resource="mapping/user.hbm.xml" />
 		<mapping resource="mapping/usergroup.hbm.xml" />
-	</session-factory>
+		<mapping resource="mapping/devmodeldict.hbm.xml" />
+		<mapping resource="mapping/devtypedict.hbm.xml" />
+        <mapping resource="mapping/iptagdict.hbm.xml" />
+        <mapping resource="mapping/projectdict.hbm.xml" />
+        <mapping resource="mapping/subnetdict.hbm.xml" />
+</session-factory>
 </hibernate-configuration>

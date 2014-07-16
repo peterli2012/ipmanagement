@@ -24,14 +24,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author pli
- * @since $Date:2014-02-10$
+ * @since $Date:2014-07-16$ $Date:2014-02-10$
  */
 public class UserAction extends BaseTableAction<UserBusiness> {
     private static Logger log = LoggerFactory.getLogger(UserAction.class);
     public final static String LOGIN_USER_SESSION_ID = "sessionUser";
     private UserBean user;
     private List<UserGroupBean> userGroup;
-    
+
     public List<UserGroupBean> getUserGroup() {
         return userGroup;
     }
@@ -80,9 +80,9 @@ public class UserAction extends BaseTableAction<UserBusiness> {
         }
 
         init.getAoColumns().add(new TableHeaderVo("ugroup", "Group").addSearchOptions(userGroup).enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("email", "Email", false));
-        init.getAoColumns().add(new TableHeaderVo("location", "Location", false));
-        init.getAoColumns().add(new TableHeaderVo("comments", "Comments", false));
+        init.getAoColumns().add(new TableHeaderVo("email", "Email"));
+        init.getAoColumns().add(new TableHeaderVo("location", "Location"));
+        init.getAoColumns().add(new TableHeaderVo("comments", "Comments"));
         return init;
     }
 
@@ -92,8 +92,9 @@ public class UserAction extends BaseTableAction<UserBusiness> {
             getBusiness().createLeaf(user);
         } else {
             UserBean origUser = (UserBean) getBusiness().getLeaf(String.valueOf(user.getId())).getResponseData();
-            BeanUtils.copyProperties(origUser, user);
-            getBusiness().updateLeaf(origUser, origUser);
+            UserBean newUser = (UserBean) origUser.clone();
+            BeanUtils.copyProperties(newUser, user);
+            getBusiness().updateLeaf(origUser, newUser);
         }
         return SUCCESS;
     }
